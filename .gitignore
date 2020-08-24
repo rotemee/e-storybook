@@ -3,3 +3,5 @@
 /auto-stories
 /stories/ui
 /src/js
+/.idea
+/package-lock.json
