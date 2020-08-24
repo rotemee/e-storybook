@@ -1,0 +1,13 @@
+.e-storybook-addon {
+	padding: 30px;
+}
+
+.e-storybook-addon__section {
+	margin-bottom: 30px;
+}
+
+pre code {
+	padding: 15px;
+	border-radius: 5px;
+	background-color: lightgrey;
+}

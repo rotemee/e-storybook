@@ -1,0 +1,42 @@
+@import '../../src/styles/tokens/_colors.scss';
+
+.ui-c-color-swatch {
+	display: flex;
+	flex-basis: 100%;
+	margin: 0 15px 15px;
+	padding: 15px;
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding: 15px;
+
+		&:first-child {
+			.#{ui-c-color-swatch}__swatch {
+				height: 100px;
+				width: 100px;
+			}
+		}
+	}
+
+	&__swatch {
+		background-color: var(--color-swatch--background-color);
+		height: 100px;
+		width: 100px;
+		margin-top: auto;
+		border: 1px solid grey;
+	}
+
+	&__title {
+
+	}
+
+	&__caption {
+		font-size: 14px;
+
+		&:first-of-type {
+			margin-top: 10px;
+		}
+	}
+}
