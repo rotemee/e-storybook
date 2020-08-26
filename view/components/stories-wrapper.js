@@ -2,15 +2,16 @@ import React from 'react';
 
 import Box from 'elementor-app/ui/atoms/box';
 
-//import DirectionLtr from './direction-ltr';
-//import DirectionRtl from './direction-rtl';
+import DirectionLtr from './direction-ltr';
+import DirectionRtl from './direction-rtl';
 
 import '../assets/css/app.css';
+import '../assets/css/app-rtl.css';
 import '../assets/lib/eicons/css/elementor-icons.css';
 import './stories-wrapper.scss';
 
 export default function StoriesWrapper( props ) {
-	//const Direction = props.rtl ? DirectionRtl : DirectionLtr;
+	const Direction = props.rtl ? DirectionRtl : DirectionLtr;
 
 	const wrapperProps = {
 		className: `e-storybook__stories-wrapper${ props.dark ? ' eps-theme-dark' : '' }`,
@@ -21,10 +22,12 @@ export default function StoriesWrapper( props ) {
 	}
 
 	return (
-		<div { ...wrapperProps }>
-			<Box padding={ 30 }>
-				{ props.children }
-			</Box>
-		</div>
+		<Direction>
+			<div { ...wrapperProps }>
+				<Box padding={ 30 }>
+					{ props.children }
+				</Box>
+			</div>
+		</Direction>
 	);
 }

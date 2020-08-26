@@ -4,13 +4,30 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = async ( { config, mode } ) => {
-	/*
+
+	config.optimization = {
+		...config.optimization,
+		splitChunks: {
+			cacheGroups: {
+				style: {
+					name: 'app',
+					test: /app\.s?css$/,
+					chunks: 'all',
+					enforce: true,
+				},
+				editor: {
+					name: 'app-rtl',
+					test: /app-rtl\.s?css$/,
+					chunks: 'all',
+					enforce: true,
+				},
+			},
+		},
+	};
+
 	config.plugins.push( new MiniCssExtractPlugin({
 		filename: '[name].css',
-		chunkFilename: '[id].css',
 	}) );
-
-	 */
 
 	config.module.rules.push(
 		{
@@ -23,7 +40,6 @@ module.exports = async ( { config, mode } ) => {
 			}*/],
 
 		},
-		/*
 		{
 			test: /\.css$/,
 			use: [
@@ -37,8 +53,6 @@ module.exports = async ( { config, mode } ) => {
 			],
 
 		},
-
-		 */
 		{
 			test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
 			loader: 'file-loader'

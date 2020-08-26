@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function DirectionLtr( props ) {
-	import (`../assets/css/app.css`);
+	useEffect( () => {
+		document.querySelector( '[href="app.css"]' ).setAttribute( 'rel', 'stylesheet' );
+		document.querySelector( '[href="app-rtl.css"]' ).setAttribute( 'rel', '' );
+	}, [] );
 
 	return (
 		<>
