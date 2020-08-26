@@ -1,15 +1,35 @@
 import React from 'react';
-import { withKnobs, text, boolean, number, select } from "@storybook/addon-knobs";
 
 export default class Utils {
 	static parseArray = ( str ) => {
-		console.log( 'str', str );
 		const arr = str.replace( /\[|]|'| /g, '' ).split( ',' );
 
 		return arr.map( (item) => this.parse( item, true ) );
 	};
 
 	static getPropType = ( prop ) => prop.type?.raw.replace( 'PropTypes.', '' ).replace( '.isRequired', '' );
+
+	static getPropData = ( propData ) => {
+		let propType = this.getPropType( propData );
+
+		if ( propType ) {
+			let isPropTypeArray = propType.indexOf( '[' ) > -1 && propType.indexOf( 'PropTypes.' ) === -1,
+				parenthesisContent = isPropTypeArray ? propType : propData.description,
+				defaultValue = Utils.parseParenthesis( parenthesisContent );
+
+			if ( propType.indexOf( 'oneOf(' ) > -1 ) {
+				propType = 'oneOf';
+			}
+
+			return {
+				type: propType,
+				defaultValue: defaultValue,
+				description: propData.description,
+			};
+		}
+
+		return {};
+	};
 
 	static parseHTML = ( str ) => {
 		const parser = new DOMParser(),
@@ -22,7 +42,7 @@ export default class Utils {
 		return React.createElement( html.localName, null, html.innerText )
 	};
 
-	static parse( str, isArrayItem ) {
+	static parse( str ) {
 		str = str.trim();
 		const stringIdentifiers = [ '\'', '\"' ];
 
@@ -62,42 +82,5 @@ export default class Utils {
 		}
 
 		return '';
-	}
-
-	static getKnob = ( knobLabel, propData ) => {
-		let propType = this.getPropType( propData );
-
-		if ( propType ) {
-			let	isPropTypeArray = propType.indexOf( '[' ) > -1 && propType.indexOf( 'PropTypes.' ) === -1,
-				parenthesisContent = isPropTypeArray ? propType : propData.description,
-				knobOptions = this.parseParenthesis( parenthesisContent ),
-				defaultValue;
-
-			if ( propType.indexOf( 'oneOf(' ) > -1 ) {
-				defaultValue = knobOptions.length ? knobOptions[ 0 ] : '';
-				propType = 'oneOf';
-			}
-
-			switch ( propType ) {
-				case 'oneOf':
-					return select( knobLabel, knobOptions, defaultValue );
-					break;
-				case 'bool':
-					return boolean( knobLabel, false );
-					break;
-				case 'number':
-					return number( knobLabel, knobOptions );
-					break;
-				default:
-					return text( knobLabel, knobOptions );
-			}
-		}
-	}
-
-	static getWrapperKnobs = () => {
-		return {
-			dark: boolean( 'DARK', false ),
-			rtl: boolean( 'RTL', false ),
-		};
 	}
 }

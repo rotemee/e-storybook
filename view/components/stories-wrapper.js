@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Box from 'elementor-app/ui/atoms/box';
+
 //import DirectionLtr from './direction-ltr';
 //import DirectionRtl from './direction-rtl';
 
@@ -20,7 +22,9 @@ export default function StoriesWrapper( props ) {
 
 	return (
 		<div { ...wrapperProps }>
-			{ props.children }
+			<Box padding={ 30 }>
+				{ props.children }
+			</Box>
 		</div>
 	);
 }

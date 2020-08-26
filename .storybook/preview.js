@@ -20,11 +20,11 @@ addParameters({
 
 addDecorator(withKnobs);
 
-export const decorators = [(Story) => {
+export const decorators = [ ( Story ) => {
 	const wrapperKnobs = {
 		dark: boolean( 'DARK', false ),
 		rtl: boolean( 'RTL', false ),
 	};
 
-	return <StoriesWrapper { ...wrapperKnobs }><Story/></StoriesWrapper>;
-}];
+	return <StoriesWrapper { ...wrapperKnobs }><Story /></StoriesWrapper>;
+} ];

@@ -63,27 +63,12 @@ function getDefaultStory( fileName, directoryPath ) {
 
 	return `import React from 'react';
 import { default as Component } from '${ componentPath }${ fileName }';
-import { storiesConfig } from 'e-storybook/view/stories-config';
-import Utils from 'e-storybook/view/stories-utils';
+import Knobs from 'e-storybook/view/utils/knobs';
 
 export const Default = () => {
-    const propsData = Component.__docgenInfo?.props,
-        knobs = {};
-    let componentContent;
+    const knobs = Knobs.getKnobs( Component );
 
-    if ( propsData ) {
-        componentContent = propsData[ 'children' ] ? Utils.parseParenthesis( propsData[ 'children' ].description ) : null;
-
-        for ( const key in propsData ) {
-            if ( ! storiesConfig.knobs.props.exclude.includes( key ) ) {
-                knobs[ key ] = Utils.getKnob( key, propsData[ key ] );
-            }
-        }
-    }
-
-    return (
-        <Component {...knobs}>{ componentContent }</Component>
-    );
+    return <Component { ...knobs.props }>{ knobs.children }</Component>;
 };
 `;
 }
