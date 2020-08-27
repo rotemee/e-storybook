@@ -8,7 +8,7 @@ const uiStoriesData = eComponentsGenerator.create( process.argv );
 module.exports = {
   stories: [
       '../stories/**/*.stories.(js|mdx)',
-      '../auto-stories/**/*.stories.(js|mdx)'
+      '../auto-components/**/*.stories.(js|mdx)'
   ],
   addons: [
       '@storybook/addon-knobs',

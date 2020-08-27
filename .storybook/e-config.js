@@ -16,10 +16,10 @@ module.exports = {
 			},
 		},
 		auto: {
-			directory: '../auto-stories/',
+			directory: '../auto-components/',
 		},
 		custom: {
-			directory: '../custom-stories/',
+			directory: '../custom-components/',
 		}
 	},
 	examples: {

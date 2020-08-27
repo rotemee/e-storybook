@@ -44,9 +44,11 @@ export default function StoriesWrapper( props ) {
 	}, [ props.rtl ] );
 
 	return (
-		<div { ...wrapperProps } className="e-storybook__stories-wrapper">
+		<div { ...wrapperProps }>
 			<Box padding={ 30 }>
-				{ props.children }
+				<div>
+					{ props.children }
+				</div>
 			</Box>
 		</div>
 	);
