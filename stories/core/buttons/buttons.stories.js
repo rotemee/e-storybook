@@ -11,7 +11,7 @@ export default {
 export const Buttons = () => (
 	<Combinations
 		component={ Button }
-		defaultProps={ { text: 'Test' } }
+		defaultProps={ { text: 'Click Here' } }
 		combinationsKey="color"
 	/>
 );

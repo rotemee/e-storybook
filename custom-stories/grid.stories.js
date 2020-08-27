@@ -9,10 +9,16 @@ import Text from 'elementor-app/ui/atoms/text';
 import Box from 'elementor-app/ui/atoms/box';
 
 export const Custom = () => {
-	const knobs = Knobs.getKnobs( Grid );
+	const gridStyle = {
+		maxWidth: '400px',
+		margin: '0 auto',
+		padding: '10px',
+		border: '1px solid lightgrey',
+	},
+	knobs = Knobs.getKnobs( Grid );
 
 	return (
-		<Box padding={ 20 } style={ { maxWidth: '400px', margin: '0 auto', padding: '10px', border: '1px solid lightgrey' } }>
+		<Box padding={ 20 } style={ gridStyle }>
 			<Grid { ...knobs.props }>
 				<Grid item>
 					<Grid item container direction="row">
