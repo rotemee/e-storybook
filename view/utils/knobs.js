@@ -3,21 +3,34 @@ import Utils from './utils';
 import { storiesConfig } from 'e-storybook/view/stories-config';
 
 export default class Knobs {
+	/**
+	 @example: Knobs.createKnob( 'string', 'List Item Padding', '20' )
+	 */
+	static createKnob = ( type, label, defaultValue, optionsDefaultValue ) => {
+		switch ( type ) {
+			case 'bool':
+				return boolean( label, defaultValue );
+			case 'number':
+				return number( label, defaultValue );
+			case 'select':
+				return select( label, defaultValue, optionsDefaultValue );
+			case 'string':
+				return text( label, defaultValue );
+			default:
+				return null;
+		}
+	}
+
 	static createKnobFromPropData = ( knobLabel, propData ) => {
 		let data = Utils.getPropData( propData );
 
 		if ( data.type ) {
-			switch ( data.type ) {
-				case 'oneOf':
-					const optionsDefaultValue = data.defaultValue.length ? data.defaultValue[ 0 ] : '';
+			if ( 'oneOf' === data.type ) {
+				const optionsDefaultValue = data.defaultValue.length ? data.defaultValue[ 0 ] : '';
 
-					return select( knobLabel, data.defaultValue, optionsDefaultValue );
-				case 'bool':
-					return boolean( knobLabel, data.defaultValue );
-				case 'number':
-					return number( knobLabel, data.defaultValue );
-				default:
-					return text( knobLabel, data.defaultValue );
+				return this.createKnob( 'select', knobLabel, data.defaultValue, optionsDefaultValue );
+			} else {
+				return this.createKnob( data.type, knobLabel, data.defaultValue );
 			}
 		}
 	}
