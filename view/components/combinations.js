@@ -4,11 +4,14 @@ import PropsCombinations from 'e-storybook/view/utils/props-combinations';
 import { select } from "@storybook/addon-knobs";
 
 import CssGrid from 'elementor-app/ui/atoms/css-grid';
+import Box from 'elementor-app/ui/atoms/box';
 import Text from 'elementor-app/ui/atoms/text';
+
+import './combinations.scss';
 
 const getComponentPropsData = ( combination ) => {
 	return (
-		<div>
+		<Box className="combinations-info">
 			{
 				Object.entries( combination ).map( ( data ) => {
 					if ( ! [ 'key' ].includes( data[0] ) ) {
@@ -20,7 +23,7 @@ const getComponentPropsData = ( combination ) => {
 					}
 				} )
 			}
-		</div>
+		</Box>
 	);
 };
 
@@ -32,15 +35,14 @@ export default function Combinations( props ) {
 		combinationsData = PropsCombinations.get( Component, combinationsKey ),
 		gridColumns = combinationsData.propsData ? Object.entries( combinationsData.propsData )[ 0 ][ 1 ].length : 1;
 
-	console.log( 'Component.__docgenInfo?.props', Component.__docgenInfo?.props );
 	return (
-		<div>
+		<div className="combinations">
 			<CssGrid columns={ gridColumns } colMinWidth={50} spacing={0}>
 				{ combinationsData.combinations.map( ( combination ) => {
 					combination = { ...combination, ...props.defaultProps };
 
 					return (
-						<div style={ { marginBottom: '40px' } }>
+						<div className="combinations__content">
 							<Component { ...combination } />
 							{ getComponentPropsData( combination ) }
 						</div>
