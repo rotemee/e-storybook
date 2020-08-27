@@ -8,8 +8,6 @@ import '../assets/lib/eicons/css/elementor-icons.css';
 import './stories-wrapper.scss';
 
 export default function StoriesWrapper( props ) {
-	const Direction = props.rtl ? DirectionRtl : DirectionLtr;
-
 	const wrapperProps = {
 		className: `e-storybook__stories-wrapper${ props.dark ? ' eps-theme-dark' : '' }`,
 	};
