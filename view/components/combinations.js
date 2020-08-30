@@ -13,10 +13,10 @@ const getComponentPropsData = ( combination ) => {
 	return (
 		<Box className="combinations-info">
 			{
-				Object.entries( combination ).map( ( data ) => {
+				Object.entries( combination ).map( ( data, index ) => {
 					if ( ! [ 'key' ].includes( data[0] ) ) {
 						return (
-							<Text variant="xs">
+							<Text variant="xs" key={ index }>
 								<strong>{ data[0] }</strong>: { data[1] }
 							</Text>
 						);
@@ -38,11 +38,11 @@ export default function Combinations( props ) {
 	return (
 		<div className="combinations">
 			<CssGrid columns={ gridColumns } colMinWidth={50} spacing={0}>
-				{ combinationsData.combinations.map( ( combination ) => {
+				{ combinationsData.combinations.map( ( combination, index ) => {
 					combination = { ...combination, ...props.defaultProps };
 
 					return (
-						<div className="combinations__content">
+						<div className="combinations__content" key={ index }>
 							<Component { ...combination } />
 							{ getComponentPropsData( combination ) }
 						</div>
