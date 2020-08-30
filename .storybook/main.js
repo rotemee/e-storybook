@@ -1,9 +1,7 @@
-const path = require('path');
 const webpack = require('webpack');
 const CreateFiles = require('./e-create-files.js');
 const eComponentsGenerator = require('./e-components-generator.js');
-const eConfig = require('./e-config');
-const uiStoriesData = eComponentsGenerator.create( process.argv );
+const componentsStoriesData = eComponentsGenerator.create( process.argv );
 
 module.exports = {
   stories: [
@@ -33,7 +31,7 @@ module.exports = {
             jQuery: 'jquery',
             __: ['@wordpress/i18n', '__'],
         } ),
-        new CreateFiles( uiStoriesData ),
+        new CreateFiles( componentsStoriesData ),
     );
 
     return config;
