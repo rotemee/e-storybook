@@ -5,7 +5,7 @@ module.exports = {
 		components: {
 			directory: '../src/js/ui/',
 			alias: 'elementor-app',
-			exclude: [ 'text', 'heading', 'grid' ],
+			exclude: [ 'text', 'heading', 'grid', 'list' ],
 		},
 	},
 	stories: {
