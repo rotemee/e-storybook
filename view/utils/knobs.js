@@ -26,7 +26,7 @@ export default class Knobs {
 
 		if ( data.type ) {
 			if ( 'oneOf' === data.type ) {
-				const optionsDefaultValue = data.defaultValue.length ? data.defaultValue[ 0 ] : '';
+				const optionsDefaultValue = propData.defaultValue ? Utils.parse( propData.defaultValue.value ) : data.defaultValue[ 0 ];
 
 				return this.createKnob( 'select', knobLabel, data.defaultValue, optionsDefaultValue );
 			} else {
