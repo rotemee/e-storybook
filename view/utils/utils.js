@@ -47,8 +47,8 @@ export default class Utils {
 		const stringIdentifiers = [ '\'', '\"' ];
 
 		const isArray = str.charAt( 0 ) === '[' && str.charAt( str.length - 1 ) === ']';
-		const isInt = /^[0-9]*$/.test( str );
-		const isFloat = /^[0-9.]*$/.test( str );
+		const isInt = Number.isInteger( parseInt( str ) );
+		const isFloat = parseFloat( str ) === str && parseFloat( str ) % 1 !== 0;
 		const isTrue = 'true' === str;
 		const isFalse = 'false' === str;
 		const isHTML = str.charAt( 0 ) === '<' && str.charAt( str.length - 1 ) === '>';
@@ -57,22 +57,29 @@ export default class Utils {
 		if ( isArray ) {
 			return this.parseArray( str );
 		} else if ( isFloat ) {
+			console.log( 'This is a float' );
 			return parseFloat( str );
 		} else if ( isInt ) {
+			console.log( 'This is an int' );
 			return parseInt( str );
 		} else if ( isTrue ) {
+			console.log( 'This is true' );
 			return true;
 		} else if ( isFalse ) {
+			console.log( 'This is false' );
 			return false;
 		} else if ( isHTML ) {
+			console.log( 'This is html' );
 			return this.parseHTML( str );
 		}  else if ( isString ) {
+			console.log( 'This is a string' );
 			return str.replace( /['"]/g, '' );
 		}
 
+		// Considering: this line can replace all the cope above and to parse according the type automatically
 		// return Function(`'use strict'; return (${ str })`)();
 		return str;
-	}s
+	}
 
 	static parseParenthesis( content ) {
 		const parenthesisContent = content.match( /\((.*?)\)/ );
