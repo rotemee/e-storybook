@@ -7,15 +7,34 @@ export default class Utils {
 		return arr.map( (item) => this.parse( item, true ) );
 	};
 
-	static getPropType = ( prop ) => prop.type?.raw.replace( 'PropTypes.', '' ).replace( '.isRequired', '' );
+	static getPropFallbackValue = ( propType, isRequired ) => {
+		switch (  propType ) {
+			case 'bool':
+				return false;
+			case 'number':
+				return 0;
+			case 'string':
+				return isRequired ? 'EXAMPLE TEXT' : '';
+			default:
+				return null;
+		}
+	}
 
 	static getPropData = ( propData ) => {
-		let propType = this.getPropType( propData );
+		const isRequired = propData.type?.raw.indexOf( '.isRequired' ) > -1
+		let propType = propData.type?.raw.replace( 'PropTypes.', '' ).replace( '.isRequired', '' );
 
 		if ( propType ) {
 			let isPropTypeArray = propType.indexOf( '[' ) > -1 && propType.indexOf( 'PropTypes.' ) === -1,
-				parenthesisContent = isPropTypeArray ? propType : propData.description,
-				defaultValue = Utils.parseParenthesis( parenthesisContent );
+				defaultValue;
+
+			if ( isPropTypeArray ) {
+				defaultValue = this.parseParenthesis( propType );
+			} else if ( propData.defaultValue ) {
+				defaultValue = this.parse( propData.defaultValue.value );
+			} else {
+				defaultValue = Utils.parseJSDocsExample( propData.description );
+			}
 
 			if ( propType.indexOf( 'oneOf(' ) > -1 ) {
 				propType = 'oneOf';
@@ -23,7 +42,7 @@ export default class Utils {
 
 			return {
 				type: propType,
-				defaultValue: defaultValue,
+				defaultValue: defaultValue || this.getPropFallbackValue( propType, isRequired ),
 				description: propData.description,
 			};
 		}
@@ -57,28 +76,28 @@ export default class Utils {
 		if ( isArray ) {
 			return this.parseArray( str );
 		} else if ( isFloat ) {
-			console.log( 'This is a float' );
 			return parseFloat( str );
 		} else if ( isInt ) {
-			console.log( 'This is an int' );
 			return parseInt( str );
 		} else if ( isTrue ) {
-			console.log( 'This is true' );
 			return true;
 		} else if ( isFalse ) {
-			console.log( 'This is false' );
 			return false;
 		} else if ( isHTML ) {
-			console.log( 'This is html' );
 			return this.parseHTML( str );
 		}  else if ( isString ) {
-			console.log( 'This is a string' );
 			return str.replace( /['"]/g, '' );
 		}
 
 		// Considering: this line can replace all the cope above and to parse according the type automatically
 		// return Function(`'use strict'; return (${ str })`)();
 		return str;
+	}
+
+	static parseJSDocsExample( content ) {
+		const exampleContent = content.match( /@example(.*)\((.*?)\)(.*?)/ );
+
+		return exampleContent && exampleContent.length ? this.parseParenthesis( exampleContent[ 0 ] ) : '';
 	}
 
 	static parseParenthesis( content ) {
