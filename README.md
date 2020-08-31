@@ -16,7 +16,7 @@ Instructions:
     * e-storybook/src/js/utils/utils.js
 
 3. Run the following command in the terminal:
-    * npm run storybook build-stories
+    * npm run storybook build-components
     
     The storybook should be opened automatically at the end of the process.
    

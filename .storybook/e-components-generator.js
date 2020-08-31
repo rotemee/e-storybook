@@ -136,7 +136,7 @@ function createComponents( directoryPath, relativePath, componentsData ) {
 
 module.exports = {
 	create: ( processArgv ) => {
-		if ( ! processArgv.includes( 'build-stories' ) ) {
+		if ( ! processArgv.includes( eConfig.stories.auto.buildTrigger ) ) {
 			return [];
 		}
 

@@ -1,4 +1,5 @@
 'use strict';
+
 var CreateFilePlugin = (function () {
   const write = require('write');
   const path = require('path');

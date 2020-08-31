@@ -1,7 +1,7 @@
 export const storiesConfig = {
 	knobs: {
 		props: {
-			exclude: [ 'children', 'className', 'key', 'onClick' ],
+			exclude: [ 'children', 'key', 'onClick', 'value' ],
 		},
 	},
 }

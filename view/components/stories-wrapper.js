@@ -2,9 +2,13 @@ import React, { useEffect } from 'react';
 
 import Box from 'elementor-app/ui/atoms/box';
 
+import '../assets/lib/e-select2/js/e-select2.full.min';
+
 import '../assets/css/app.css';
 import '../assets/css/app-rtl.css';
 import '../assets/lib/eicons/css/elementor-icons.css';
+import '../assets/lib/e-select2/css/e-select2.min.css';
+
 import './stories-wrapper.scss';
 
 export default function StoriesWrapper( props ) {
@@ -15,6 +19,13 @@ export default function StoriesWrapper( props ) {
 	if ( props.rtl ) {
 		wrapperProps[ 'dir' ] = 'rtl';
 	}
+
+	// Currently this object is being used in the select2 source component
+	window.elementorCommon = {
+		config: {
+			isRTL: props.rtl,
+		}
+	};
 
 	useEffect( () => {
 		// First we need to remove the RTL file from the DOM, only then we'll be able to make the switch between the files.

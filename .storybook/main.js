@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const CreateFiles = require('./e-create-files.js');
+const CreateFiles = require('./plugins/create-files.js');
 const eComponentsGenerator = require('./e-components-generator.js');
 const componentsStoriesData = eComponentsGenerator.create( process.argv );
 

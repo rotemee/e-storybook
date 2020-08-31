@@ -1,11 +1,24 @@
-const path = require('path');
-
 module.exports = {
 	source: {
 		components: {
 			directory: '../src/js/ui/',
 			alias: 'elementor-app',
-			exclude: [ 'text', 'heading', 'grid', 'list' ],
+			exclude: [
+				'text',
+				'heading',
+				'grid',
+				'list',
+				'select',
+				'select2',
+				'menu',
+				'css-grid',
+				'card',
+				'card-header',
+				'card-body',
+				'card-overlay',
+				'card-image',
+				'card-footer',
+			],
 		},
 	},
 	stories: {
@@ -17,6 +30,7 @@ module.exports = {
 		},
 		auto: {
 			directory: '../auto-components/',
+			buildTrigger: 'build-components',
 		},
 		custom: {
 			directory: '../custom-components/',

@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
@@ -31,19 +30,7 @@ module.exports = async ( { config, mode } ) => {
 	config.module.rules.push(
 		{
 			test: /\.scss$/,
-			use: [
-				'style-loader',
-				'css-loader',
-				'sass-loader',
-				// Consider adding to app.css and app-rtl.css a code that creates a smooth transition between the files.
-				/*{
-					loader: "sass-resources-loader",
-					options: {
-						resources: require( path.resolve(__dirname, './e-style-assets.js') ),
-					}
-				}*/
-			],
-
+			use: [ 'style-loader', 'css-loader', 'sass-loader' ],
 		},
 		{
 			test: /\.css$/,

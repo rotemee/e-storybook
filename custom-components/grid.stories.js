@@ -15,11 +15,12 @@ export const Custom = () => {
 		padding: '10px',
 		border: '1px solid lightgrey',
 	},
-	knobs = Knobs.getKnobs( Grid );
+	gridKnobs = Knobs.getKnobs( Grid, { container: true, justify: 'center' } ),
+	buttonknobs = Knobs.getKnobs( Button );
 
 	return (
 		<Box padding={ 20 } style={ gridStyle }>
-			<Grid { ...knobs.props }>
+			<Grid { ...gridKnobs.props }>
 				<Grid item>
 					<Grid item container direction="row">
 						<Checkbox style={ { marginRight: '10px' } } />
@@ -30,7 +31,7 @@ export const Custom = () => {
 				</Grid>
 
 				<Grid item>
-					<Button text="Button" variant="contained" color="cta" />
+					<Button { ...buttonknobs.props } text="Button" variant="contained" color="cta" />
 				</Grid>
 			</Grid>
 		</Box>
