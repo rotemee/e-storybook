@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-
 import Box from 'elementor-app/ui/atoms/box';
 
 import '../assets/lib/e-select2/js/e-select2.full.min';
-
 import '../assets/css/app.css';
 import '../assets/css/app-rtl.css';
 import '../assets/lib/eicons/css/elementor-icons.css';

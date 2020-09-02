@@ -6,16 +6,14 @@ import CardBody from 'elementor-app/ui/card/card-body';
 import CardImage from 'elementor-app/ui/card/card-image';
 import CardOverlay from 'elementor-app/ui/card/card-overlay';
 import CardFooter from 'elementor-app/ui/card/card-footer';
-import Heading from 'elementor-app/ui/atoms/heading';
-import Text from 'elementor-app/ui/atoms/text';
-import Button from 'elementor-app/ui/molecules/button';
+import Text from 'elementor-app/ui/atoms/text';;
 import CssGrid from 'elementor-app/ui/atoms/css-grid';
 import Grid from 'elementor-app/ui/grid/grid';
 
 import './cards.scss';
 
 export default {
-	title: 'Core/Cards',
+	title: 'EXAMPLES/Cards',
 	component: Card,
 };
 

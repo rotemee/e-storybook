@@ -1,7 +1,8 @@
 module.exports = {
 	source: {
 		components: {
-			directory: '../src/js/ui/',
+			directory: '../src/js/',
+			excludeFolders: [ 'utils' ],
 			alias: 'elementor-app',
 			exclude: [
 				'text',
@@ -18,6 +19,7 @@ module.exports = {
 				'card-overlay',
 				'card-image',
 				'card-footer',
+				'error-boundary',
 			],
 		},
 	},
@@ -25,7 +27,7 @@ module.exports = {
 		fileType: '.stories.js',
 		main: {
 			components: {
-				directory: '../stories/ui/',
+				directory: '../stories/components/',
 			},
 		},
 		auto: {

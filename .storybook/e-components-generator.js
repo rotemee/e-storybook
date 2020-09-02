@@ -4,10 +4,12 @@ const write = require('write');
 const eConfig = require('./e-config');
 const eUtils = require('./e-utils');
 
-const getComponentRelativePath = ( directoryPath ) => {
-	const dirname = __dirname.split( path.sep ).slice(0, -1).join( path.sep ) + path.sep;
+const getComponentsBaseDirectory = () => {
+	return eConfig.source.components.directory.replace( '../', '' );
+};
 
-	return directoryPath.replace( dirname, '' ).replace( /\\/g, '/' ).replace('src/js', eConfig.source.components.alias);
+const getComponentRelativePath = ( directoryPath ) => {
+	return directoryPath.replace( getComponentsBaseDirectory(), eConfig.source.components.alias + '/' );
 };
 
 const getExamplesData = ( fileName ) => {
@@ -19,12 +21,20 @@ const getExamplesData = ( fileName ) => {
 	};
 };
 
+function pathFoldersToUppercase( path ) {
+	// A folder is any string before the last forward slash
+	return path
+		.split( '/' )
+		.map( ( item, index, arr ) => index !== arr.length ? eUtils.dashCaseToPascalCase( item ) : item )
+		.join( '/' );
+}
+
 function getDefaultStoryFolder( directoryPath ) {
-	if ( directoryPath.charAt( directoryPath.length-1 ) === path.sep ) {
+	if ( directoryPath.charAt( directoryPath.length - 1 ) === '/' ) {
 		directoryPath = directoryPath.slice(0, -1);
 	}
 
-	return eUtils.dashCaseToPascalCase( directoryPath.split( path.sep ).pop() );
+	return pathFoldersToUppercase( directoryPath.replace( getComponentsBaseDirectory(), '' ) );
 }
 
 function isCustomStoryExist( fileName ) {
@@ -43,7 +53,7 @@ function getStoryBase( fileName, directoryPath, storiesTypes ) {
 ${ examplesData.import }
 
 export default {
-    title: 'UI/${storyFolder}/${ componentName }',
+    title: 'Components/${storyFolder}/${ componentName }',
     component: Component,
     parameters: {
         usage: {
@@ -53,8 +63,8 @@ export default {
     },
 };
 
-${ storiesTypes.isDefaultNeeded ? `export * from '../${eConfig.stories.auto.directory}${ fileName }.stories'` : '' }
-${ storiesTypes.isCustomExist ? `export * from '../${eConfig.stories.custom.directory}${ fileName }.stories'` : '' }
+${ storiesTypes.isDefaultNeeded ? `export * from '../${eConfig.stories.auto.directory}${ fileName }.stories';` : '' }
+${ storiesTypes.isCustomExist ? `export * from '../${eConfig.stories.custom.directory}${ fileName }.stories';` : '' }
 `;
 }
 
@@ -102,13 +112,16 @@ function createComponents( directoryPath, relativePath, componentsData ) {
 		}
 
 		files.forEach( (file) => {
-			if ( eUtils.isDirectory( file ) ) {
+			if ( eUtils.isDirectory( file ) && ! eConfig.source.components.excludeFolders.includes( file ) ) {
 				componentsData = createComponents( directoryPath + file + path.sep, file, componentsData );
 			} else {
 				if ( eUtils.isJSFile( file ) ) {
 					const fileName = eUtils.getFileName( file ),
 						isDefaultNeeded = ! eConfig.source.components.exclude.includes( fileName ),
 						isCustomExist = isCustomStoryExist( fileName );
+
+					const dirname = __dirname.split( path.sep ).slice(0, -1).join( path.sep ) + path.sep;
+					directoryPath = directoryPath.replace( dirname, '' ).replace( /\\/g, '/' );
 
 					if ( isDefaultNeeded ) {
 						// Create default story

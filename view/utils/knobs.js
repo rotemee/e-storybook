@@ -7,19 +7,29 @@ export default class Knobs {
 	 @example: Knobs.createKnob( 'string', 'List Item Padding', '20' )
 	 */
 	static createKnob = ( type, label, defaultValue, optionsDefaultValue ) => {
+		defaultValue = this.parseTranslationFunction( defaultValue );
+
 		switch ( type ) {
 			case 'bool':
 				return boolean( label, defaultValue );
 			case 'number':
 				return number( label, defaultValue );
 			case 'select':
-				console.log( label, defaultValue, optionsDefaultValue );
 				return select( label, defaultValue, optionsDefaultValue );
 			case 'string':
 				return text( label, defaultValue );
 			default:
 				return null;
 		}
+	}
+
+	static parseTranslationFunction = ( value ) => {
+		if ( 'string' === typeof value && value.indexOf( '__(' ) > -1 ) {
+			value = value.replace( /[_()]/g, '' ).split( ',' )[ 0 ];
+			value = Utils.parse( value );
+		}
+
+		return value;
 	}
 
 	static createKnobFromPropData = ( knobLabel, propData, defaultValue ) => {
@@ -37,20 +47,22 @@ export default class Knobs {
 		}
 	}
 
-	static getKnobs( Component, defaultProps ) {
+	static getKnobs( Component, defaultProps, labelPrefix ) {
 		const propsData = Component.__docgenInfo?.props,
 			componentChildren = propsData[ 'children' ] ? Utils.parseParenthesis( propsData[ 'children' ].description ) : null,
 			propsKnobs = {};
 
-		console.log( 'Component.__docgenInfo', Component.__docgenInfo );
-
 		if ( propsData ) {
 			for ( const key in propsData ) {
 				if ( ! storiesConfig.knobs.props.exclude.includes( key ) ) {
-					const defaultPropValue = defaultProps?.hasOwnProperty( key ) ? defaultProps[ key ] : null,
-						knobLabelPrefix = Component.__docgenInfo?.displayName + '_' || '';
+					const defaultPropValue = defaultProps?.hasOwnProperty( key ) ? defaultProps[ key ] : null;
+					let knobLabelPrefix = labelPrefix || Component.__docgenInfo?.displayName;
 
-					propsKnobs[ key ] = this.createKnobFromPropData( knobLabelPrefix + key, propsData[ key ], defaultPropValue );
+					knobLabelPrefix = knobLabelPrefix ? knobLabelPrefix + ' - ' : '';
+
+					const knobLabel = knobLabelPrefix + Utils.camelCaseToSpacedPascalCase( key );
+
+					propsKnobs[ key ] = this.createKnobFromPropData( knobLabel, propsData[ key ], defaultPropValue );
 				}
 			}
 		}

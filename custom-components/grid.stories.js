@@ -16,13 +16,14 @@ export const Custom = () => {
 		border: '1px solid lightgrey',
 	},
 	gridKnobs = Knobs.getKnobs( Grid, { container: true, justify: 'center' } ),
-	buttonknobs = Knobs.getKnobs( Button );
+	gridItemKnobs = Knobs.getKnobs( Grid, { item: true, container: true, direction: 'row' }, 'Grid-Item' ),
+	buttonKnobs = Knobs.getKnobs( Button );
 
 	return (
 		<Box padding={ 20 } style={ gridStyle }>
 			<Grid { ...gridKnobs.props }>
 				<Grid item>
-					<Grid item container direction="row">
+					<Grid { ...gridItemKnobs.props }>
 						<Checkbox style={ { marginRight: '10px' } } />
 						<Heading variant="h3">Title</Heading>
 					</Grid>
@@ -31,7 +32,7 @@ export const Custom = () => {
 				</Grid>
 
 				<Grid item>
-					<Button { ...buttonknobs.props } text="Button" variant="contained" color="cta" />
+					<Button { ...buttonKnobs.props } text="Button" variant="contained" color="cta" />
 				</Grid>
 			</Grid>
 		</Box>

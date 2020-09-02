@@ -6,6 +6,6 @@ module.exports = {
 	isSCSSFile: ( fileName ) => fileName.indexOf( '.scss' ) > -1,
 	isFileExist: ( path ) => fs.existsSync( path ),
 	getFileName: ( fileName ) => fileName.split( '.' )[ 0 ],
-	dashCaseToPascalCase: ( string ) => ( string.charAt(0).toUpperCase() + string.slice(1) ).replace( /\b-([a-z])/g, (_, char) => char.toUpperCase() ),
-	dashCaseToCamelCase: ( string ) => string.replace( /\b-([a-z])/g, (_, char) => char.toUpperCase() ),
+	dashCaseToPascalCase: ( string ) => ( string.charAt( 0 ).toUpperCase() + string.slice( 1 ) ).replace( /\b-([a-z])/g, ( _, char ) => char.toUpperCase() ),
+	dashCaseToCamelCase: ( string ) => string.replace( /\b-([a-z])/g, ( _, char ) => char.toUpperCase() ),
 };

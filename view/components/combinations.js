@@ -33,11 +33,12 @@ export default function Combinations( props ) {
 		combinationsPropsArr = Object.keys( componentPropTypes),
 		combinationsKey = select( 'Combinations Key', combinationsPropsArr, props.combinationsKey || combinationsPropsArr[ 0 ] ),
 		combinationsData = PropsCombinations.get( Component, combinationsKey ),
-		gridColumns = combinationsData.propsData ? Object.entries( combinationsData.propsData )[ 0 ][ 1 ].length : 1;
+		combinationsKeyLength = combinationsData.propsData ? Object.entries( combinationsData.propsData )[ 0 ][ 1 ].length : 1,
+		gridColumns = props.columns || combinationsKeyLength;
 
 	return (
 		<div className="combinations">
-			<CssGrid columns={ gridColumns } colMinWidth={50} spacing={0}>
+			<CssGrid columns={ gridColumns } colMinWidth={ 50 } spacing={ 0 }>
 				{ combinationsData.combinations.map( ( combination, index ) => {
 					combination = { ...combination, ...props.defaultProps };
 
@@ -51,4 +52,11 @@ export default function Combinations( props ) {
 			</CssGrid>
 		</div>
 	);
+};
+
+Combinations.propTypes = {
+	component: PropTypes.func,
+	defaultProps: PropTypes.object,
+	combinationsKey: PropTypes.string,
+	columns: PropTypes.number,
 };

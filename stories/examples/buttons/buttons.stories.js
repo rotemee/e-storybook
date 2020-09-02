@@ -1,10 +1,9 @@
 import React from 'react';
 import Combinations from 'e-storybook/view/components/combinations';
-
 import Button from 'elementor-app/ui/molecules/button';
 
 export default {
-	title: 'Core/Buttons',
+	title: 'EXAMPLES/Buttons',
 	component: Button,
 };
 

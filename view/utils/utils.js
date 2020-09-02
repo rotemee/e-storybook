@@ -7,6 +7,18 @@ export default class Utils {
 		return arr.map( (item) => this.parse( item, true ) );
 	};
 
+	static camelCaseToSpacedPascalCase = ( string ) => {
+		string = string.replace( /([A-Z])/g, (_, char) => ' ' + char );
+
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	};
+
+	static dashCaseToSpacesPascalCase = ( string ) => {
+		string = string.charAt(0).toUpperCase() + string.slice(1);
+
+		return string.replace( /\b-([a-z])/g, (_, char) => ' ' + char.toUpperCase() );
+	};
+
 	static getPropFallbackValue = ( propType, isRequired ) => {
 		switch (  propType ) {
 			case 'bool':
