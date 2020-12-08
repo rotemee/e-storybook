@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import theme from '@eps/theme';
 import Box from 'elementor-app/ui/atoms/box';
 
 import '../assets/lib/e-select2/js/e-select2.full.min';
@@ -10,6 +12,8 @@ import '../assets/lib/e-select2/css/e-select2.min.css';
 import './stories-wrapper.scss';
 
 export default function StoriesWrapper( props ) {
+	const epsTheme = createMuiTheme( theme );
+
 	const wrapperProps = {
 		className: `e-storybook__stories-wrapper${ props.dark ? ' eps-theme-dark' : '' }`,
 	};
@@ -53,12 +57,14 @@ export default function StoriesWrapper( props ) {
 	}, [ props.rtl ] );
 
 	return (
-		<div { ...wrapperProps }>
-			<Box padding={ 30 }>
-				<div>
-					{ props.children }
-				</div>
-			</Box>
-		</div>
+		<ThemeProvider theme={ epsTheme }>
+			<div { ...wrapperProps }>
+				<Box padding={ 30 }>
+					<div>
+						{ props.children }
+					</div>
+				</Box>
+			</div>
+		</ThemeProvider>
 	);
 }

@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 module.exports = async ( { config, mode } ) => {
 	config.optimization = {
 		...config.optimization,
@@ -56,6 +55,7 @@ module.exports = async ( { config, mode } ) => {
 			"elementor-app": path.resolve(__dirname, '../src/js/'),
 			"@elementor/router": path.resolve(__dirname, '../src/router'),
 			"e-storybook": path.resolve(__dirname, '../'),
+			"@eps": path.resolve(__dirname, '../src/eps/'),
 		},
 		extensions: ['.js', '.jsx', '.css', '.png', '.jpg', '.gif', '.jpeg'],
 	};
