@@ -19,6 +19,14 @@ module.exports = {
 	},
 	direction: 'ltr',
 	mixins: {
+		gutters: {
+			'@media (min-width:600px)': {
+				paddingLeft: 24,
+				paddingRight: 24,
+			},
+			paddingLeft: 16,
+			paddingRight: 16,
+		},
 		toolbar: {
 			minHeight: 56,
 			'@media (min-width:0px) and (orientation: landscape)': {
@@ -30,7 +38,12 @@ module.exports = {
 		},
 	},
 	overrides: {
-
+		MuiButton: {
+			root: {
+				padding: '5px 10px',
+			},
+			outlined: {},
+		},
 	},
 	palette: {
 		common: {
@@ -251,6 +264,7 @@ module.exports = {
 			textTransform: 'uppercase',
 		},
 	},
+	spacing: 8,
 	shape: {
 		borderRadius: 4,
 	},
