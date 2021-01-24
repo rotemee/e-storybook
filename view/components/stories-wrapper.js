@@ -59,7 +59,7 @@ export default function StoriesWrapper( props ) {
 	return (
 		<ThemeProvider theme={ epsTheme }>
 			<div { ...wrapperProps }>
-				<Box padding={ 30 }>
+				<Box padding="30">
 					<div>
 						{ props.children }
 					</div>
