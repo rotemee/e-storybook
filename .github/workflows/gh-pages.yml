@@ -24,14 +24,14 @@ jobs:
       - name: Deploy Locally
         run: npm run deploy --dry-run -o ./out
       - name: Upload Storybook to GitHub Pages
-          env:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          run: |
-            cd ./out
-            git init
-            git config user.name "GH Pages Bot"
-            git config user.email "bot@elementor.com"
-            git config commit.gpgsign false
-            git add .
-            git commit -m "Deploy Storybook to GitHub Pages"
-            git push --force --quiet "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" master:gh-pages
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          cd ./out
+          git init
+          git config user.name "GH Pages Bot"
+          git config user.email "bot@elementor.com"
+          git config commit.gpgsign false
+          git add .
+          git commit -m "Deploy Storybook to GitHub Pages"
+          git push --force --quiet "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" master:gh-pages
