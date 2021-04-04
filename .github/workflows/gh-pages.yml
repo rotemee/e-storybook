@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: npm run build-storybook build-components
       - name: Set User
-          run: |
+        run: |
             git config --global user.name "rotemee"
             git config --global user.email "rotemee@elementor.com"
       - name: Upload Storybook to GitHub Pages
