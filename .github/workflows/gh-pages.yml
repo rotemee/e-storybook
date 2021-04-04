@@ -20,11 +20,16 @@ jobs:
       - name: Show Info
         run: git remote -v
       - name: Build
-        run: npm run build-storybook build-components
-      - name: Set User
-        run: |
-            git config --global user.name "rotemee"
-            git config --global user.email "rotem@elementor.com"
-            git remote set-url origin git@github.com/rotemee/e-storybook.git
+        run: npm run build-storybook build-components --dry-run -o ./out
       - name: Upload Storybook to GitHub Pages
-        run: npm run deploy
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          cd ./out
+          git init
+          git config user.name "GH Pages Bot"
+          git config user.email "bot@elementor.com"
+          git config commit.gpgsign false
+          git add .
+          git commit -m "Deploy Storybook to GitHub Pages"
+          git push --force --quiet "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" master:gh-pages
