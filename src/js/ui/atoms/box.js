@@ -18,7 +18,7 @@ export default function Box( props ) {
 
 	return (
 		<div style={ style } className={ Utils.arrayToClassName( classes ) }>
-			{ props.children }
+			Test
 		</div>
 	);
 }
