@@ -13,7 +13,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook build-components",
     "storybook-delete-components": "IF EXIST auto-components RMDIR /Q/S auto-components IF EXIST stories\\components RMDIR /Q/S stories\\components",
-    "deploy": "gh-pages -d storybook-static"
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "@storybook/addon-links": "^6.0.5",
     "@storybook/addons": "^6.0.5",
     "@storybook/react": "^6.0.5",
+    "@storybook/storybook-deployer": "^2.8.7",
     "@wordpress/i18n": "^3.14.0",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
