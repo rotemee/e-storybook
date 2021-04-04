@@ -1,0 +1,17 @@
+name: Deploy Storybook
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Storyboard for GitHub Pages
+        env:
+          CI: true
+        run: |
+          npm run deploy
