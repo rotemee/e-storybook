@@ -13,7 +13,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "storybook-delete-components": "IF EXIST auto-components RMDIR /Q/S auto-components IF EXIST stories\\components RMDIR /Q/S stories\\components",
-    "predeploy": "npm run build-storybook",
+    "predeploy": "npm run build-storybook build-components",
     "deploy": "gh-pages -d storybook-static"
   },
   "author": "",
