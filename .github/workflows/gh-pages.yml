@@ -21,4 +21,6 @@ jobs:
         env:
           CI: true
         run: |
+          git config user.name "GH Pages Bot"
+          git config user.email "bot@elementor.com"
           npm run deploy
