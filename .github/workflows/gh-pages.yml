@@ -22,9 +22,4 @@ jobs:
       - name: Build
         run: npm run build-storybook build-components
       - name: Upload Storybook to GitHub Pages
-        env:
-          CI: true
-        run: |
-          git config --global user.name "GH Pages Bot"
-          git config --global user.email "bot@elementor.com"
-          npm run deploy
+        run: npm run deploy
