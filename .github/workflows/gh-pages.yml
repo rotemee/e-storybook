@@ -24,8 +24,7 @@ jobs:
       - name: Set User
         run: |
             git config --global user.name "rotemee"
-            git config --global user.email "rotemee@elementor.com"
+            git config --global user.email "rotem@elementor.com"
+            git remote set-url origin git@github.com/rotemee/e-storybook.git
       - name: Upload Storybook to GitHub Pages
-        env:
-          CI: true
         run: npm run deploy
