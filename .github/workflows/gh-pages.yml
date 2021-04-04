@@ -16,8 +16,7 @@ jobs:
         with:
           node-version: 13.x
       - name: Install Node Modules
-          run: |
-            npm install
+          run: npm install
       - name: Upload Storybook to GitHub Pages
         env:
           CI: true
