@@ -21,8 +21,8 @@ export const Custom = () => {
 	return (
 		<List { ...listKnobs }>
 			{
-				data.map( ( item ) => (
-					<List.Item { ...listItemKnobs }>
+				data.map( ( item, index ) => (
+					<List.Item { ...listItemKnobs } key={ index }>
 						<Grid container>
 							<Checkbox style={ { marginInlineEnd: '10px' } } />
 							<Heading variant="h3">{ item.title }</Heading>
