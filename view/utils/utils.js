@@ -28,11 +28,11 @@ export default class Utils {
 			case 'string':
 				return isRequired ? 'EXAMPLE TEXT' : '';
 			default:
-				return null;
+				return '';
 		}
 	}
 
-	static getPropData = ( propData ) => {
+	static getPropData = ( propData, propName ) => {
 		const isRequired = propData.type?.raw.indexOf( '.isRequired' ) > -1;
 		let propType = propData.type?.raw.replace( 'PropTypes.', '' ).replace( '.isRequired', '' );
 
@@ -42,7 +42,7 @@ export default class Utils {
 
 			let defaultValue;
 
-			if ( isOneOfTypeArray || 'any' === propType ) {
+			if ( isOneOfTypeArray || 'children' === propName ) {
 				defaultValue = 'Example Text';
 			} else if ( isOneOfArray ) {
 				defaultValue = this.parseParenthesis( propType );

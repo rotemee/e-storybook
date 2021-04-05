@@ -34,8 +34,8 @@ export default class Knobs {
 		return value;
 	}
 
-	static createKnobFromPropData = ( knobLabel, propData, defaultValue ) => {
-		let data = Utils.getPropData( propData );
+	static createKnobFromPropData = ( knobLabel, propData, propName, defaultValue ) => {
+		let data = Utils.getPropData( propData, propName );
 		const customDefaultValue = defaultValue || data.defaultValue;
 
 		if ( data.type ) {
@@ -56,14 +56,14 @@ export default class Knobs {
 		if ( propsData ) {
 			for ( const key in propsData ) {
 				if ( ! storiesConfig.knobs.props.exclude.includes( key ) ) {
-					const defaultPropValue = defaultProps?.hasOwnProperty( key ) ? defaultProps[ key ] : null;
-					let knobLabelPrefix = labelPrefix || Component.__docgenInfo?.displayName;
+					let defaultPropValue = defaultProps?.hasOwnProperty( key ) ? defaultProps[ key ] : null,
+						knobLabelPrefix = labelPrefix || Component.__docgenInfo?.displayName;
 
 					knobLabelPrefix = knobLabelPrefix ? knobLabelPrefix + ' - ' : '';
 
 					const knobLabel = knobLabelPrefix + Utils.camelCaseToSpacedPascalCase( key );
 
-					propsKnobs[ key ] = this.createKnobFromPropData( knobLabel, propsData[ key ], defaultPropValue );
+					propsKnobs[ key ] = this.createKnobFromPropData( knobLabel, propsData[ key ], key, defaultPropValue );
 				}
 			}
 		}
