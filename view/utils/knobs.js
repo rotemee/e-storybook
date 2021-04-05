@@ -20,6 +20,10 @@ export default class Knobs {
 			case 'oneOfType':
 			case 'any':
 				return text( label, defaultValue );
+			case 'array': // An array prop type might be required, therefore we always return a default value.
+				return [];
+			case 'func': // A function rop type might be required, therefore we always return a default value.
+				return () => {};
 			default:
 				return null;
 		}
