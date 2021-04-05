@@ -17,6 +17,8 @@ export default class Knobs {
 			case 'select':
 				return select( label, defaultValue, optionsDefaultValue );
 			case 'string':
+			case 'oneOfType':
+			case 'any':
 				return text( label, defaultValue );
 			default:
 				return null;
@@ -49,7 +51,6 @@ export default class Knobs {
 
 	static getKnobs( Component, defaultProps, labelPrefix ) {
 		const propsData = Component.__docgenInfo?.props,
-			componentChildren = propsData[ 'children' ] ? Utils.parseParenthesis( propsData[ 'children' ].description ) : null,
 			propsKnobs = {};
 
 		if ( propsData ) {
@@ -67,9 +68,6 @@ export default class Knobs {
 			}
 		}
 
-		return {
-			props: propsKnobs,
-			children: componentChildren,
-		};
+		return propsKnobs;
 	}
 }

@@ -33,14 +33,18 @@ export default class Utils {
 	}
 
 	static getPropData = ( propData ) => {
-		const isRequired = propData.type?.raw.indexOf( '.isRequired' ) > -1
+		const isRequired = propData.type?.raw.indexOf( '.isRequired' ) > -1;
 		let propType = propData.type?.raw.replace( 'PropTypes.', '' ).replace( '.isRequired', '' );
 
 		if ( propType ) {
-			let isPropTypeArray = propType.indexOf( '[' ) > -1 && propType.indexOf( 'PropTypes.' ) === -1,
-				defaultValue;
+			const isOneOfTypeArray = propType.indexOf( 'oneOfType(' ) > -1,
+				isOneOfArray = propType.indexOf( 'oneOf(' ) > -1;
 
-			if ( isPropTypeArray ) {
+			let defaultValue;
+
+			if ( isOneOfTypeArray || 'any' === propType ) {
+				defaultValue = 'Example Text';
+			} else if ( isOneOfArray ) {
 				defaultValue = this.parseParenthesis( propType );
 			} else if ( propData.defaultValue ) {
 				defaultValue = this.parse( propData.defaultValue.value );
@@ -48,7 +52,9 @@ export default class Utils {
 				defaultValue = Utils.parseJSDocsExample( propData.description );
 			}
 
-			if ( propType.indexOf( 'oneOf(' ) > -1 ) {
+			if ( isOneOfTypeArray ) {
+				propType = 'oneOfType';
+			} else if ( isOneOfArray ) {
 				propType = 'oneOf';
 			}
 
@@ -101,7 +107,7 @@ export default class Utils {
 			return str.replace( /['"]/g, '' );
 		}
 
-		// Considering: this line can replace all the cope above and to parse according the type automatically
+		// Considering: this line can replace all of the code above and to parse according the type automatically
 		// return Function(`'use strict'; return (${ str })`)();
 		return str;
 	}
@@ -115,7 +121,7 @@ export default class Utils {
 	static parseParenthesis( content ) {
 		const parenthesisContent = content.match( /\((.*?)\)/ );
 
-		if ( parenthesisContent && parenthesisContent.length ) {
+		if ( parenthesisContent?.length ) {
 			return this.parse( parenthesisContent[ 1 ] );
 		}
 
