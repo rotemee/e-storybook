@@ -66,7 +66,7 @@ export const Cards = () => {
 
 	return (
 		<Grid container justify="center">
-			<CssGrid {...knobs.props}>
+			<CssGrid { ...knobs }>
 				{
 					cardsData.map( ( card, index ) => getCard( card.title, card.imageUrl, card.footer, index) )
 				}
