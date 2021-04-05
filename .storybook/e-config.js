@@ -5,8 +5,6 @@ module.exports = {
 			excludeFolders: [ 'utils' ],
 			alias: 'elementor-app',
 			exclude: [
-				'text',
-				'heading',
 				'grid',
 				'list',
 				'select',
