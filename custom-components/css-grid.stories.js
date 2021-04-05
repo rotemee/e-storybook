@@ -13,7 +13,7 @@ export const Custom = () => {
 	const knobs = Knobs.getKnobs( CssGrid );
 
 	return (
-		<CssGrid { ...knobs.props }>
+		<CssGrid { ...knobs }>
 			{
 				data.map( ( item ) => (
 					<section>

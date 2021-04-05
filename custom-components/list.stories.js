@@ -19,7 +19,7 @@ export const Custom = () => {
 		};
 
 	return (
-		<List { ...listKnobs.props }>
+		<List { ...listKnobs }>
 			{
 				data.map( ( item ) => (
 					<List.Item { ...listItemKnobs }>

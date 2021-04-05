@@ -74,7 +74,7 @@ export const Custom = () => {
 	const knobs = Knobs.getKnobs( Menu );
 
 	return (
-		<Menu { ...knobs.props } menuItems={ data } actionButton={ actionButton }>
+		<Menu { ...knobs } menuItems={ data } actionButton={ actionButton }>
 			<div className='eps-menu__title'>
 				{ __( 'Site Parts', 'elementor' ) }
 			</div>

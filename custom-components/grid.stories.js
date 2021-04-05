@@ -21,9 +21,9 @@ export const Custom = () => {
 
 	return (
 		<Box padding={ 20 } style={ gridStyle }>
-			<Grid { ...gridKnobs.props }>
+			<Grid { ...gridKnobs }>
 				<Grid item>
-					<Grid { ...gridItemKnobs.props }>
+					<Grid { ...gridItemKnobs }>
 						<Checkbox style={ { marginRight: '10px' } } />
 						<Heading variant="h3">Title</Heading>
 					</Grid>
@@ -32,7 +32,7 @@ export const Custom = () => {
 				</Grid>
 
 				<Grid item>
-					<Button { ...buttonKnobs.props } text="Button" variant="contained" color="cta" />
+					<Button { ...buttonKnobs } text="Button" variant="contained" color="cta" />
 				</Grid>
 			</Grid>
 		</Box>

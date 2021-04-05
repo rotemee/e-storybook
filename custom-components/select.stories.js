@@ -12,6 +12,6 @@ export const Custom = () => {
 	const knobs = Knobs.getKnobs( Select );
 
 	return (
-		<Select { ...knobs.props } options={ data } />
+		<Select { ...knobs } options={ data } />
 	);
 };
