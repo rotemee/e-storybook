@@ -48,7 +48,6 @@ InlineLink.propTypes = {
 	url: PropTypes.string,
 	target: PropTypes.string,
 	rel: PropTypes.string,
-	text: PropTypes.string,
 	color: PropTypes.oneOf( [ 'primary', 'secondary', 'cta', 'link', 'disabled' ] ),
 	underline: PropTypes.oneOf( [ 'none', 'hover', 'always' ] ),
 	italic: PropTypes.bool,
