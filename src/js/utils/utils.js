@@ -12,7 +12,6 @@ export default class Utils {
 	};
 
 	static stringToRemValues = ( string ) => {
-		console.log( 'string', string );
 		return string
 			.split( ' ' )
 			.map( ( value ) => Utils.pxToRem( value ) )
