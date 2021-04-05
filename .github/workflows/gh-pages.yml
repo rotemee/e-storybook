@@ -17,9 +17,7 @@ jobs:
           node-version: 13.x
       - name: Install Node Modules
         run: npm i
-      - name: Show Info
-        run: git remote -v
-      - name: Build
+      - name: Build Storybook
         run: npm run build-storybook build-components
       - name: Deploy Locally
         run: npm run deploy-storybook -- --dry-run -o ./out
