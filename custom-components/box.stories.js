@@ -4,7 +4,7 @@ import { addDocs } from 'e-storybook/view/components/docs';
 import Docs from 'e-storybook/docs/box';
 
 export const Custom = () => (
-	<Box padding={40}>Custom Story Content 222</Box>
+	<Box padding="40"></Box>
 );
 
 Custom.parameters = {
