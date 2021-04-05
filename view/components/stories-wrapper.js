@@ -4,10 +4,10 @@ import theme from '@eps/theme';
 import Box from 'elementor-app/ui/atoms/box';
 
 import '../assets/lib/e-select2/js/e-select2.full.min';
+import '../assets/lib/e-select2/css/e-select2.min.css';
+import '../assets/lib/eicons/css/elementor-icons.css';
 import '../assets/css/app.css';
 import '../assets/css/app-rtl.css';
-import '../assets/lib/eicons/css/elementor-icons.css';
-import '../assets/lib/e-select2/css/e-select2.min.css';
 
 import './stories-wrapper.scss';
 
@@ -40,6 +40,11 @@ export default function StoriesWrapper( props ) {
 				.querySelector( `[href="app.css"]` )
 				.setAttribute( 'class', 'direction-css-file' );
 		}
+
+		// Moving the main.css before the app CSS.
+		const mainCssElement = document.querySelector( `[href="main.css"]` );
+
+		mainCssElement.parentNode.insertBefore( mainCssElement, document.querySelector( '.direction-css-file' ) );
 	}, [] );
 
 	useEffect( () => {
